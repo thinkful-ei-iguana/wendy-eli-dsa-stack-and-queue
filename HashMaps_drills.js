@@ -1,26 +1,47 @@
 const HashMap = require("./HashMap");
+const LinkedList = require("./LinkedList");
 
 const main = () => {
   const lotr = new HashMap();
 
-  lotr.set("Hobbit", "Bilbo");
-  lotr.set("Hobbit", "Frodo");
-  lotr.set("Wizard", "Gandalf");
-  lotr.set("Human", "Aragorn");
-  lotr.set("Elf", "Legolas");
-  lotr.set("Maiar", "The Necromancer");
-  lotr.set("Maiar", "Sauron");
-  lotr.set("Ringbearer", "Gollum");
-  lotr.set("LadyOfLight", "Galadriel");
-  lotr.set("HalfElven", "Arwen");
-  lotr.set("Ent", "Treebeard");
+  const characters = [
+    { Hobbit: "Bilbo" },
+    { Hobbit: "Frodo" },
+    { Wizard: "Gandolf" },
+    { Human: "Aragorn" },
+    { Elf: "Legolas" },
+    { Maiar: "The Necromancer" },
+    { Maiar: "Sauron" },
+    { RingBearer: "Gollum" },
+    { LadyOfLight: "Galadriel" },
+    { HalfElven: "Arwen" },
+    { Ent: "Treebeard" }
+  ];
 
-  console.log(lotr.get("Maiar"));
-  console.log(lotr.get("Hobbit"));
+  characters.forEach(char => {
+    const list = new LinkedList();
+    let duplicate;
+
+    try {
+      duplicate = lotr.get(Object.keys(char)[0], Object.values(char)[0]);
+    } catch (err) {
+      lotr.set(Object.keys(char)[0], Object.values(char)[0]);
+    }
+
+    if (duplicate) {
+      list.insertFirst(char);
+      list.insertFirst(duplicate);
+      lotr.set(Object.keys(char)[0], list);
+    }
+  });
+
+  // console.log(JSON.stringify(lotr.get("Maiar")));
+  // console.log(lotr);
+  // console.log(lotr.get("Hobbit"));
   console.log(lotr._capacity);
 };
 
-// main();
+main();
 
 const demo = () => {
   const hm = new HashMap(11);
@@ -75,4 +96,4 @@ const paliPerm = str => {
   return console.log(count <= 1);
 };
 
-paliPerm("app");
+// paliPerm("app");
