@@ -21,7 +21,7 @@ class Stack {
     this.top = node;
   }
 
-  pop(data) {
+  pop() {
     if (!this.top) {
       return;
     }
