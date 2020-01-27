@@ -12,16 +12,13 @@ function peek(stack) {
 
 // peek(starTrek);
 
-function isEmpty(stack) {
-  if (!stack.top) {
-    return true;
-  }
-}
+const isEmpty = stack => (!stack.top ? true : false);
 
 // isEmpty(starTrek);
 
 function display(stack) {
   if (!stack.top) {
+    console.log("stack empty");
     return;
   }
   console.log(stack.top.data);
@@ -59,30 +56,27 @@ const isPalindrome = s => {
 // 5. sort stack
 
 const sortStack = stack => {
-  const temp = new Stack();
-  let highVal;
-  // if the new node is smaller than the existing top,
-  // then it gets pushed to that stack.
-  // otherwise, push to stack 2
+  let tempStack = new Stack();
 
   while (stack.top) {
-    highVal = stack.pop();
-    console.log(highVal);
-    if (isEmpty(temp)) {
-      temp.push(highVal);
-    }
-    if (highVal > temp.top.data) {
-      temp.push(highVal);
-    } else {
-      highVal = stack.pop();
-    }
+    let tmp = stack.pop();
+
+    while (tempStack.top && tempStack.top.data > tmp)
+      stack.push(tempStack.pop());
+
+    tempStack.push(tmp);
   }
-  return console.log(JSON.stringify(temp));
+
+  return tempStack;
 };
+
 const testStack = new Stack();
 testStack.push("4");
 testStack.push("1");
 testStack.push("6");
 testStack.push("2");
 // console.log(JSON.stringify(testStack))
-sortStack(testStack);
+// console.log(testStack);
+const sorted = sortStack(testStack);
+
+console.log(JSON.stringify(sorted, null, 2));
