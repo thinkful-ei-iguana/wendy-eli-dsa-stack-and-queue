@@ -66,8 +66,12 @@ const sortStack = stack => {
 
     tempStack.push(tmp);
   }
-
-  return tempStack;
+  // console.log(tempStack.top);
+  while (tempStack.top) {
+    stack.top = tempStack.pop();
+  }
+  console.log(stack.top);
+  return stack;
 };
 
 const testStack = new Stack();
@@ -75,8 +79,5 @@ testStack.push("4");
 testStack.push("1");
 testStack.push("6");
 testStack.push("2");
-// console.log(JSON.stringify(testStack))
-// console.log(testStack);
-const sorted = sortStack(testStack);
 
-console.log(JSON.stringify(sorted, null, 2));
+sortStack(testStack);
