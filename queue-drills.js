@@ -54,5 +54,28 @@ menQ.enqueue("toby");
 womenQ.enqueue("pam");
 womenQ.enqueue("angela");
 
-squarePairs(menQ, womenQ);
-console.log(menQ);
+// squarePairs(menQ, womenQ);
+// console.log(menQ);
+
+// 10. the ophidian bank
+const bankQueue = queue => {
+  while (queue.last != null) {
+    const chance = Math.random();
+    console.log(queue, chance);
+
+    if (chance > 0.75) {
+      queue.enqueue(queue.dequeue());
+    } else queue.dequeue();
+  }
+
+  console.log(queue);
+};
+
+const bank = new queue();
+bank.enqueue("1");
+bank.enqueue("2");
+bank.enqueue("3");
+bank.enqueue("4");
+bank.enqueue("5");
+
+bankQueue(bank);
